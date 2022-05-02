@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -15,6 +15,7 @@ function App() {
   const coefficientsRef = useRef({ Lv1: 0 });
   const [refreshFlag, setRefreshFlag] = useState(true);
   const [frequency, setFrequency] = useState(1);
+  const frequencyRef = useRef(1);
 
   useEffect(() => {
     setTimeout(() => {
@@ -29,17 +30,18 @@ function App() {
   }
   const handleAddFrequencyClick = () => {
     setFrequency(frequency + 1)
+    frequencyRef.current = frequencyRef.current + 1
   }
   const getAnswer = (nowCount, coefficients) => {
     return nowCount + coefficients?.Lv1 * 1
   }
-  console.log('rerender', count)
+  console.log('rerender', count, frequency)
   return (
     <div className="App">
-      <Container maxWidth="sm">
+      <Container maxWidth="xs" disableGutters>
         <Box sx={{ bgcolor: '#cfe8fc', height: '100vh', display: 'flex', flexDirection: 'column' }} >
           <header className="App-header">
-            <StyledImg src={logo} alt="logo" frequency={frequency} />
+            <StyledImg src={logo} alt="logo" frequency={frequencyRef.current} />
             <Typography variant="button" display="block" gutterBottom>
               {count}
             </Typography>
@@ -51,14 +53,25 @@ function App() {
               <Button size="large" variant="text">Text</Button>
             </Stack>
           </Box>
+          <Typography textAlign={"left"}>
+            v0.0.1
+          </Typography>
         </Box>
       </Container>
     </div>
   );
 }
 
+const logoAnimation = keyframes`
+from {
+  transform: rotate(0deg);
+}
+to {
+  transform: rotate(360deg);
+}
+`
 const StyledImg = styled.img`
-animation: App-logo-spin infinite ${props => 6 / props?.frequency || 6}s linear;
+animation: ${logoAnimation} infinite ${props => 1 / props?.frequency || 1}s linear;
 height: 40vmin;
 pointer-events: none;
 `;
