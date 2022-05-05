@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -11,50 +10,82 @@ import styled, { keyframes } from 'styled-components';
 
 function App() {
   const [count, setCount] = useState(0);
+  const countRef = useRef(count);
+  countRef.current = count;
+  const [dx, setDx] = useState(0);
   const [coefficients, setCoefficients] = useState({ Lv1: 0 })
   const coefficientsRef = useRef({ Lv1: 0 });
+  coefficientsRef.current = coefficients
   const [refreshFlag, setRefreshFlag] = useState(true);
   const [frequency, setFrequency] = useState(1);
-  const frequencyRef = useRef(1);
+  const frequencyRef = useRef(frequency);
+  frequencyRef.current = frequency
 
   useEffect(() => {
     setTimeout(() => {
-      setCount(getAnswer(count, coefficientsRef.current))
+      const dx = getDx(coefficientsRef.current)
+      setCount(countRef.current + dx)
+      setDx(dx)
       setRefreshFlag(!refreshFlag)
-    }, (1000 / frequency))
+    }, (1000 / frequencyRef.current))
   }, [refreshFlag]);
 
   const handleLv1AddClick = () => {
+    setCount(count - getAddLv1Cost(coefficients))
     setCoefficients({ ...coefficients, Lv1: coefficients.Lv1 + 1 })
-    coefficientsRef.current = { ...coefficientsRef.current, Lv1: coefficientsRef.current.Lv1 + 1 }
   }
   const handleAddFrequencyClick = () => {
+    setCount(count - getFrequencyCost(frequency))
     setFrequency(frequency + 1)
-    frequencyRef.current = frequencyRef.current + 1
   }
-  const getAnswer = (nowCount, coefficients) => {
-    return nowCount + coefficients?.Lv1 * 1
+  const getDx = (coefficients) => {
+    return coefficients?.Lv1 * 1
   }
-  console.log('rerender', count, frequency)
+  const getAddLv1Cost = (coefficients) => {
+    return (Math.ceil(coefficients?.Lv1 * Math.pow(2, Math.log(coefficients?.Lv1)))) || coefficients?.Lv1
+  }
+  const getFrequencyCost = (frequency) => {
+    return (Math.ceil(Math.pow(1.8, frequency))) + Math.pow(frequency, 2) || 1
+  }
+  //console.log('rerender', count, frequency)
   return (
     <div className="App">
       <Container maxWidth="xs" disableGutters>
         <Box sx={{ bgcolor: '#cfe8fc', height: '100vh', display: 'flex', flexDirection: 'column' }} >
           <header className="App-header">
             <StyledImg src={logo} alt="logo" frequency={frequencyRef.current} />
-            <Typography variant="button" display="block" gutterBottom>
-              {count}
+            <Typography display="block" gutterBottom>
+              {count}  (+{dx * frequency}/s)
             </Typography>
           </header>
           <Box sx={{ bgcolor: '#cfe8fc', flex: 1 }} >
             <Stack direction="column">
-              <Button size="large" variant="text" onClick={handleLv1AddClick}>{coefficients.Lv1}</Button>
-              <Button size="large" variant="text" onClick={handleAddFrequencyClick}>{frequency}</Button>
-              <Button size="large" variant="text">Text</Button>
+              <Button size="large" variant="text" disabled={count - getAddLv1Cost(coefficients) < 0} onClick={handleLv1AddClick} style={{ justifyContent: 'space-between' }}>
+                <div style={{ flex: 1, textAlign: 'left', textTransform: 'none' }}>
+                  係數Lv1
+                </div>
+                <div >
+                  {coefficients.Lv1}
+                </div>
+                <div style={{ flex: 1, textAlign: 'right' }}>
+                  購買下一級：-{getAddLv1Cost(coefficients)}
+                </div>
+              </Button>
+              <Button size="large" variant="text" disabled={count - getFrequencyCost(frequency) < 0 || frequency === 60} onClick={handleAddFrequencyClick}>
+                <div style={{ flex: 1, textAlign: 'left', textTransform: 'none' }}>
+                  頻率
+                </div>
+                <div >
+                  {frequency}
+                </div>
+                <div style={{ flex: 1, textAlign: 'right' }}>
+                  購買下一級：-{getFrequencyCost(frequency)}
+                </div>
+              </Button>
             </Stack>
           </Box>
           <Typography textAlign={"left"}>
-            v0.0.1
+            v0.0.2
           </Typography>
         </Box>
       </Container>
