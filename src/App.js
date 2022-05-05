@@ -20,6 +20,8 @@ function App() {
   const [frequency, setFrequency] = useState(1);
   const frequencyRef = useRef(frequency);
   frequencyRef.current = frequency
+  const [startTime, setStartTime] = useState(new Date());
+  let timeCount = coefficients.Lv1 === 0 ? 0 : Math.floor((new Date() - startTime) / 1000)
 
   useEffect(() => {
     setTimeout(() => {
@@ -31,6 +33,9 @@ function App() {
   }, [refreshFlag]);
 
   const handleLv1AddClick = () => {
+    if (coefficients.Lv1 === 0) {
+      setStartTime(new Date())
+    }
     setCount(count - getAddLv1Cost(coefficients))
     setCoefficients({ ...coefficients, Lv1: coefficients.Lv1 + 1 })
   }
@@ -53,6 +58,9 @@ function App() {
       <Container maxWidth="xs" disableGutters>
         <Box sx={{ bgcolor: '#cfe8fc', height: '100vh', display: 'flex', flexDirection: 'column' }} >
           <header className="App-header">
+            <Typography display="block" gutterBottom textAlign={'left'} width="100%" paddingLeft={'1rem'}>
+              Play time:{timeCount}s
+            </Typography>
             <StyledImg src={logo} alt="logo" frequency={frequencyRef.current} />
             <Typography display="block" gutterBottom>
               {count}  (+{dx * frequency}/s)
