@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { ChakraProvider,Stack,Button ,Text} from '@chakra-ui/react'
+import {Box} from '@chakra-ui/react';
+//import Container from '@mui/material/Container';
+//import Button from '@mui/material/Button';
+//import Text from '@mui/material/Text';
 import styled, { keyframes } from 'styled-components';
 
 function App() {
@@ -54,17 +54,20 @@ function App() {
   }
   //console.log('rerender', count, frequency)
   return (
+    <ChakraProvider>
+     
+  
     <div className="App">
-      <Container maxWidth="xs" disableGutters>
+      
         <Box sx={{ bgcolor: '#cfe8fc', height: '100vh', display: 'flex', flexDirection: 'column' }} >
           <header className="App-header">
-            <Typography display="block" gutterBottom textAlign={'left'} width="100%" paddingLeft={'1rem'}>
+            <Text display="block" gutterBottom textAlign={'left'} width="100%" paddingLeft={'1rem'}>
               Play time:{timeCount}s
-            </Typography>
+            </Text>
             <StyledImg src={logo} alt="logo" frequency={frequencyRef.current} />
-            <Typography display="block" gutterBottom>
+            <Text display="block" gutterBottom>
               {count}  (+{dx * frequency}/s)
-            </Typography>
+            </Text>
           </header>
           <Box sx={{ bgcolor: '#cfe8fc', flex: 1 }} >
             <Stack direction="column">
@@ -92,12 +95,13 @@ function App() {
               </Button>
             </Stack>
           </Box>
-          <Typography textAlign={"left"}>
-            v0.0.2
-          </Typography>
+          <Text textAlign={"left"}>
+            v0.0.3
+          </Text>
         </Box>
-      </Container>
+      
     </div>
+    </ChakraProvider>
   );
 }
 
