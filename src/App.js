@@ -1,14 +1,28 @@
 import logo from './logo.svg';
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-import { ChakraProvider,Stack,Button ,Text} from '@chakra-ui/react'
-import {Box} from '@chakra-ui/react';
+import { ChakraProvider, Stack, Button, Text, Box, Input,HStack } from '@chakra-ui/react'
+//import {Box} from '@chakra-ui/react';
 //import Container from '@mui/material/Container';
 //import Button from '@mui/material/Button';
 //import Text from '@mui/material/Text';
 import styled, { keyframes } from 'styled-components';
 
 function App() {
+const[lef,setLef]=useState(0);
+const[right,setRight]=useState(0);
+const[sum,setSum]=useState(0);
+
+const handleSum=(lefNum,rightNum)=>{
+  if(isNaN(lefNum)||isNaN(rightNum)){
+    return "error"
+  } else{return lef*right }
+  
+  
+}
+
+
+
   const [count, setCount] = useState(0);
   const countRef = useRef(count);
   countRef.current = count;
@@ -24,12 +38,16 @@ function App() {
   let timeCount = coefficients.Lv1 === 0 ? 0 : Math.floor((new Date() - startTime) / 1000)
 
   useEffect(() => {
+
     setTimeout(() => {
       const dx = getDx(coefficientsRef.current)
+
       setCount(countRef.current + dx)
       setDx(dx)
       setRefreshFlag(!refreshFlag)
+
     }, (1000 / frequencyRef.current))
+
   }, [refreshFlag]);
 
   const handleLv1AddClick = () => {
@@ -55,10 +73,10 @@ function App() {
   //console.log('rerender', count, frequency)
   return (
     <ChakraProvider>
-     
-  
-    <div className="App">
-      
+
+
+      <div className="App">
+
         <Box sx={{ bgcolor: '#cfe8fc', height: '100vh', display: 'flex', flexDirection: 'column' }} >
           <header className="App-header">
             <Text display="block" gutterBottom textAlign={'left'} width="100%" paddingLeft={'1rem'}>
@@ -70,7 +88,7 @@ function App() {
             </Text>
           </header>
           <Box sx={{ bgcolor: '#cfe8fc', flex: 1 }} >
-            <Stack direction="column">
+            <Stack direction="column" >
               <Button size="large" variant="text" disabled={count - getAddLv1Cost(coefficients) < 0} onClick={handleLv1AddClick} style={{ justifyContent: 'space-between' }}>
                 <div style={{ flex: 1, textAlign: 'left', textTransform: 'none' }}>
                   係數Lv1
@@ -94,13 +112,23 @@ function App() {
                 </div>
               </Button>
             </Stack>
+            <HStack spacing='15px'>
+            <Input placeholder='Basic usage'  value={lef} onChange={(e)=>setLef(e.target.value)} />
+            <Text fontSize='4xl'>x</Text>
+            <Input placeholder='Basic usage' />
+            <Text fontSize='4xl'>=</Text>
+            <Text fontSize='4xl'></Text>
+            </HStack>
+            
           </Box>
           <Text textAlign={"left"}>
             v0.0.3
           </Text>
         </Box>
-      
-    </div>
+
+
+      </div>
+
     </ChakraProvider>
   );
 }
