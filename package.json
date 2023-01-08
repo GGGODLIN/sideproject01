@@ -1,6 +1,6 @@
 {
   "name": "sideproject01",
-  "homepage": "https://GGGODLIN.github.io/sideproject01",
+  "homepage": "./",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

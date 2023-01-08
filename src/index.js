@@ -11,7 +11,8 @@ import {
 import Computertest from "./pages/computer/computer"
 import Footer from './components/footer';
 import Chatroom from './pages/im/chatroom';
-
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 const NavbarWrapper =()=>{
 return(
@@ -56,8 +57,12 @@ const router =createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Container maxWidth="sm" sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+    
 
+    <RouterProvider router={router} />
+  
+    </Container>
   </React.StrictMode>
 );
 
