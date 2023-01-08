@@ -6,34 +6,58 @@ import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
+  Outlet
 } from "react-router-dom";
 import Computertest from "./pages/computer/computer"
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import Footer from './components/footer';
+import Chatroom from './pages/im/chatroom';
 
 
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />
-  },
+const NavbarWrapper =()=>{
+return(
+  <div>
   
-  {
-    path: "/computer",
-    element: <Computertest />
-  },
+    <Outlet />
+    <Footer/>
+  </div>
+)
+}
 
-]);
+
+
+const router =createBrowserRouter([
+  {
+    path:'/',
+    element: <NavbarWrapper />,
+    children:[{
+      path: "/",
+      element: <App />
+    },
+  
+    {
+      path: "/computer",
+      element: <Computertest />
+    },
+    {
+      path: "/im",
+      element: <Chatroom />
+    },
+  
+  ]
+
+    
+  }
+])
+
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
-   
-    
+
   </React.StrictMode>
 );
 

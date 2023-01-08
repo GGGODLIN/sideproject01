@@ -1,10 +1,4 @@
-import {
-  ChakraProvider,
-  Input, HStack, Box, Text, Heading,
-  Button, Center, Select, Stack, Table,
-  Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption,
-  TableContainer,
-} from '@chakra-ui/react'
+
 import { useReducer, useState, useEffect } from 'react';
 import Calculator from './calculator';
 
@@ -20,7 +14,7 @@ export default function Computertest() {
 
   const [sumBtn, setsunBtn] = useState(0);
 
-  
+
 
 
 
@@ -56,9 +50,9 @@ export default function Computertest() {
           </Select>
         </Center>
 
-<p>
-  {sumBtn}
-</p>
+        <p>
+          {sumBtn}
+        </p>
 
 
       </div>
