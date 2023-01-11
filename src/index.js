@@ -35,7 +35,7 @@ root.render(
           <Route path="/" element={<App />} />
           <Route path="/chatlist" element={<ChatList />} />
           <Route path="/im" element={<Chatroom />} />
-          <Route path="/components" element={<PopoverTop />} />
+          
           <Route path="" element={<Navigate replace to="/im" />} />
          
         
