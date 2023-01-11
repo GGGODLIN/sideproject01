@@ -1,35 +1,49 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import {useNavigate }from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import {
+  ChakraProvider, ChakraBaseProvider,
+  Tabs, TabList, TabPanels, Tab, TabPanel
+  , Image, extendTheme, useRouter,
 
+} from '@chakra-ui/react'
 
+const Footer = () => {
 
-const Footer=()=>{
-  
-  const navigate=useNavigate();
-    const [value, setValue] = React.useState(0);
+  //const footerNavigate = useNavigate();
+
+  const [value, setValue] = React.useState(0);
 
 
   return (
-    <Box sx={{ width: 500 }}>
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-          navigate(newValue)
-        }}
-      >
-        <BottomNavigationAction value={"/"} label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction value={"/im"} label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-      </BottomNavigation>
-    </Box>
+    <Tabs defaultIndex={1} align="center" isFitted size="sm">
+
+
+      <TabList >
+        <Tab >
+          <Link to="/">
+            遊戲大廳
+          </Link>
+        </Tab>
+
+        <Tab >話題論壇</Tab>
+
+        <Link to="/im">
+          <Tab >訊息</Tab>
+        </ Link >
+
+        <Tab >交易所</Tab>
+
+        <Tab >設定</Tab>
+
+    //<Tab onClick={() => { footerNavigate("/") }}> 遊戲大廳</Tab>
+    //<Tab >話題論壇</Tab>
+    //<Tab onClick={() => { footerNavigate("/im") }}>訊息</Tab>
+   // <Tab >交易所</Tab>
+    //<Tab >設定</Tab>
+
+      </TabList>
+    </Tabs >
+
   );
 }
 

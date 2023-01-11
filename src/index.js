@@ -6,67 +6,44 @@ import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
-  Outlet
+  Outlet,
+  BrowserRouter as Router,
+  Routes, Route, Navigate,
+
 } from "react-router-dom";
 import Computertest from "./pages/computer/computer"
 import Footer from './components/footer';
 import Chatroom from './pages/im/chatroom';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
+import { ChakraProvider } from '@chakra-ui/react'
+import { Home } from '@mui/icons-material';
+import PopoverTop from './components/popovertop';
+import ChatList from './pages/chatlist/chatlist';
 
-const NavbarWrapper =()=>{
-return(
-  <div>
-  
-    <Outlet />
-    <Footer/>
-  </div>
-)
-}
-
-
-
-const router =createBrowserRouter([
-  {
-    path:'/',
-    element: <NavbarWrapper />,
-    children:[{
-      path: "/",
-      element: <App />
-    },
-  
-    {
-      path: "/computer",
-      element: <Computertest />
-    },
-    {
-      path: "/im",
-      element: <Chatroom />
-    },
-  
-  ]
-
-    
-  }
-])
 
 
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <Container maxWidth="sm" sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-    
 
-    <RouterProvider router={router} />
-  
-    </Container>
-  </React.StrictMode>
+root.render(
+  <ChakraProvider>
+
+    <Router>
+      <Routes>
+       
+          <Route path="/" element={<App />} />
+          <Route path="/chatlist" element={<ChatList />} />
+          <Route path="/im" element={<Chatroom />} />
+          <Route path="/components" element={<PopoverTop />} />
+          <Route path="" element={<Navigate replace to="/im" />} />
+         
+        
+      </Routes>
+
+    </Router>
+  </ChakraProvider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+
