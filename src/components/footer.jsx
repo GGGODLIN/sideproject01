@@ -25,7 +25,9 @@ const Footer = () => {
           </Link>
         </Tab>
 
-        <Tab >話題論壇</Tab>
+      
+          <Tab >話題論壇</Tab>
+       
 
         <Link to="/im">
           <Tab >訊息</Tab>
@@ -35,11 +37,11 @@ const Footer = () => {
 
         <Tab >設定</Tab>
 
-    //<Tab onClick={() => { footerNavigate("/") }}> 遊戲大廳</Tab>
-    //<Tab >話題論壇</Tab>
-    //<Tab onClick={() => { footerNavigate("/im") }}>訊息</Tab>
-   // <Tab >交易所</Tab>
-    //<Tab >設定</Tab>
+        {/* <Tab onClick={() => { footerNavigate("/") }}> 遊戲大廳</Tab> */}
+        {/* //<Tab >話題論壇</Tab>
+    <Tab onClick={() => { footerNavigate("/im") }}>訊息</Tab>
+    <Tab >交易所</Tab>
+    <Tab >設定</Tab> */}
 
       </TabList>
     </Tabs >

@@ -21,29 +21,88 @@ import ChatList from './pages/chatlist/chatlist';
 
 
 
+const NavbarWrapper = () => {
+  return (
+    <div>
+
+      <Outlet />
+      <Footer />
+    </div>
+  )
+}
+
+
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <NavbarWrapper />,
+    children: [{
+      path: "/",
+      element: <App />
+    },
+    {
+      path: "/chatlist",
+      element: <ChatList  />
+      
+    },
+    {
+      path: "/im",
+      element: <Chatroom />,
+        },
+  
+    ]
+
+
+  }
+])
+
+
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 root.render(
-  <ChakraProvider>
+  <React.StrictMode>
 
-    <Router>
-      <Routes>
+    <ChakraProvider>
+
+
+      <RouterProvider router={router} />
+
+      
+    </ChakraProvider>
+
+  </React.StrictMode>
+);
+
+
+
+
+
+
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// root.render(
+//   <ChakraProvider>
+
+//     <Router>
+//       <Routes>
        
-          <Route path="/" element={<App />} />
-          <Route path="/chatlist" element={<ChatList />} />
-          <Route path="/im" element={<Chatroom />} />
-          
-          <Route path="" element={<Navigate replace to="/im" />} />
+//           <Route path="/" element={<App />} />
+//           <Route path="/im" element={<Chatroom />} >
+//           <Route path="/chatlist" element={<ChatList />} />
+//           </Route>
+        
+        
+//           <Route path="" element={<Navigate replace to="/im" />} />
          
         
-      </Routes>
+//       </Routes>
 
-    </Router>
-  </ChakraProvider>
-);
+//     </Router>
+//   </ChakraProvider>
+// );
 
 
 

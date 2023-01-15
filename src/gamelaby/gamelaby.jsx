@@ -38,7 +38,7 @@ const Gamelaby = ()=>{
  icon={<PhoneIcon />}
 />,
 
-    )
+)
 };
 
 export default Gamelaby
