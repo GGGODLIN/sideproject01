@@ -39,9 +39,13 @@ const Chatroom = () => {
 
 
   function DataTabs({ data }) {
+
     const [serchKey, setSerchKey] = useState("");
 
+
     const hadleSerchInput = (e) => { setSerchKey(e.target.value) };
+
+
 
     return (
 
@@ -49,7 +53,7 @@ const Chatroom = () => {
 
         <FormControl  >
 
-          <Input onChange={(e) => { setSerchKey(e.target.value) }} value={serchKey} placeholder='搜尋' width="25%" />
+          <Input onChange={hadleSerchInput} value={serchKey} placeholder='搜尋' width="25%" />
 
           <Heading size="md" color="#2DCC70" align='center' >
             Chat
@@ -66,15 +70,9 @@ const Chatroom = () => {
         <TabPanels>
           {data.map((index) => (
             <TabPanel p={4} key={index}>
-              <ChatList />
+              <ChatList serchKey={serchKey} />
             </TabPanel>
           ))}
-          {/* {<TabPanel>
-            serchKey.reduce(arr,searchInput) => {
-              serchKey.message === hadleSerchInput ? [...array,searchInput]:arr
-            }
-          </TabPanel>} */}
-          
         </TabPanels>
 
       </Tabs>

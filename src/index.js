@@ -15,7 +15,7 @@ import Computertest from "./pages/computer/computer"
 import Footer from './components/footer';
 import Chatroom from './pages/im/chatroom';
 import { ChakraProvider } from '@chakra-ui/react'
-import { Home } from '@mui/icons-material';
+
 import PopoverTop from './components/popovertop';
 import ChatList from './pages/chatlist/chatlist';
 
@@ -48,7 +48,9 @@ const router = createBrowserRouter([
     },
     {
       path: "/im",
-      element: <Chatroom />,
+      element: <Chatroom />
+
+    
         },
   
     ]

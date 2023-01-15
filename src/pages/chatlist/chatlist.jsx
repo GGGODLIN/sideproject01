@@ -11,12 +11,19 @@ import { json } from 'react-router-dom'
 let src = "https://638b643281df38ab3467feab.mockapi.io/account1"
 
 
-const ChatList = (serchChatList) => {
+const ChatList = ({serchKey}) => {
 
 
   const [srcData, setSrcData] = useState([]);
+console.log("test",serchKey)
 
+let renderData=srcData
 
+if(serchKey){
+  renderData= srcData.filter((data)=>{
+    console.log("test2",data,serchKey,data?.nickname?.includes?.(serchKey))
+    return (data?.message?.includes?.(serchKey) )})
+}
   useEffect(() => {
     fetch(src)
       .then(response => { return response.json(); })
@@ -24,17 +31,19 @@ const ChatList = (serchChatList) => {
   }
     , []);
 
+  
 
 
 
-  //chatData.map((item)=>{return <Tr></Tr>})
 
   return (
+
+    
     <TableContainer>
       <Table variant='simple'>
 
         <Tbody >
-          {srcData?.map((data) => {
+          {renderData?.map((data) => {
             return <Tr key={data.id}>
               <Td>
                 {/* 聊天列表『全部訊息總覽』 */}
@@ -67,8 +76,9 @@ const ChatList = (serchChatList) => {
 
             </Tr>
             
-          })}
-
+          })
+          // .filter(setSrcData.message.inclub())  式這裡filter麻
+        }
         </Tbody>
 
       </Table>
