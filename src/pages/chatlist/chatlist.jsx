@@ -14,6 +14,7 @@ let src = "https://638b643281df38ab3467feab.mockapi.io/account1"
 const ChatList = ({serchKey}) => {
 
 
+
   const [srcData, setSrcData] = useState([]);
 console.log("test",serchKey)
 
@@ -22,7 +23,7 @@ let renderData=srcData
 if(serchKey){
   renderData= srcData.filter((data)=>{
     console.log("test2",data,serchKey,data?.nickname?.includes?.(serchKey))
-    return (data?.message?.includes?.(serchKey) )})
+    return (data?.nickname?.includes?.(serchKey) )})
 }
   useEffect(() => {
     fetch(src)

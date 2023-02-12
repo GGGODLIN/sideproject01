@@ -25,9 +25,9 @@ const Footer = () => {
           </Link>
         </Tab>
 
-      
+      <Link to="/chat/chatindex">
           <Tab >話題論壇</Tab>
-         
+          </Link>
 
         <Link to="/im">
           <Tab >訊息</Tab>
@@ -35,7 +35,10 @@ const Footer = () => {
 
         <Tab >交易所</Tab>
 
-        <Tab >設定</Tab>
+        <Tab >測試</Tab>
+        <Link to="/TestPeople/LargePersonListItem">
+          <Tab >訊息</Tab>
+        </ Link >
 
         {/* <Tab onClick={() => { footerNavigate("/") }}> 遊戲大廳</Tab> */}
         {/* //<Tab >話題論壇</Tab>

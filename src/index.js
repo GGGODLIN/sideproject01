@@ -18,8 +18,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 import PopoverTop from './components/popovertop';
 import ChatList from './pages/chatlist/chatlist';
-
-
+import { ChatIcon } from '@chakra-ui/icons';
+import ChatIndex from './pages/chat/chatIndex';
+import Test1122 from './TestPeople/LargePersonListItem';
 
 const NavbarWrapper = () => {
   return (
@@ -52,7 +53,17 @@ const router = createBrowserRouter([
 
     
         },
-  
+        {
+          path: "/chat/chatindex",
+          element: <ChatIndex />
+            
+            },
+            
+       {
+              path: "/TestPeople",
+              element: <Test1122 />
+                
+                },
     ]
 
 
